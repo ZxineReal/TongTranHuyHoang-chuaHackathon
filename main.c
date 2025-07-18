@@ -179,6 +179,34 @@ int getLength(Node* head) {
     return length;
 }
 
+void sortTask(Node* head) {
+    if (head == NULL) {
+        printf("Danh sach khoa hoc rong!\n");
+        return;
+    }
+    int swapped;
+    Node* current;
+    Node* tempvar = NULL;
+
+    do {
+        swapped = 0;
+        current = head;
+        while (current->next != tempvar) {
+            if (current->task.priority < current->next->task.priority) {
+                Task temp = current->task;
+                current->task = current->next->task;
+                current->next->task = temp;
+                swapped = 1;
+            }
+            current = current->next;
+        }
+        tempvar = current;
+    } while (swapped);
+
+    printf("Sap xep thanh cong!\n");
+}
+
+
 int main() {
     Task task;
     Node* head = NULL;
@@ -243,6 +271,7 @@ int main() {
             case 5:
                 break;
             case 6:
+                sortTask(head);
                 break;
             case 7:
                 char key[50];
